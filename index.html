@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History, Art & Culture Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        #quiz-container {
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        img {
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h2>Identify the Image!</h2>
+        <img id="quiz-image" src="" alt="Quiz Image">
+        <br>
+        <input type="text" id="answer" placeholder="Your answer...">
+        <button onclick="submitAnswer()">Submit</button>
+        <p id="result"></p>
+        <p id="timer"></p>
+    </div>
+
+    <script>
+        let images = [
+            "images/01 THE LAST SUPPER- Leonardo da Vinci.jpg",
+            "images/02 CENTAUR.jpg",
+            "images/03 Lorelei - Johann Köler.jpg",
+            "images/04 Ludwig van Beethoven - Stieler.jpg",
+            "images/05 OUROBOROS - infinity.jpg",
+            "images/06 Vincenzo Camuccini - La morte di Cesare.jpg",
+            "images/07 Pisa.jpg",
+            "images/08 PERSEUS AND MEDUSA Benvenuto Cellini 1554.jpg",
+            "images/09 MOSES.jpg",
+            "images/10 Hindenburg disaster, May 6 1937.jpg",
+            "images/11 michelangelo-adam-god-close-up.jpg",
+            "images/12 Phoenix.jpg",
+            "images/13 Corset.jpg",
+            "images/14 NEFERTITI.jpeg",
+            "images/15-Claude-Monet-Impression-Soleil-Levant-1872-Musee-Marmottan-Monet-Paris-France.jpg",
+            "images/16 KAHLO by KOBO.jpg",
+            "images/17 BABEL.jpg",
+            "images/18 Gutenberg_Bible,_Lenox_Copy,_New_York_Public_Library,_2009._Pic_01.jpg",
+            "images/19 gone-with-the-wind-1939-poster-1.jpg",
+            "images/20 CLEOPATRA.jpg",
+            "images/21 Munch - SCREAM.jpg",
+            "images/22 THOR WITH MJOLNIR.jpg",
+            "images/23 BAYEUX TAPESTRY.jpeg",
+            "images/24 William Shakespeare.jpg",
+            "images/25 APOLLO.jpg",
+            "images/26 Van-Gogh-Self-Portrait-with-Bandaged-Ear-Rectangular-Fridge-Magnet-FRONT.jpg",
+            "images/27 PIETA.jpg",
+            "images/28 COLOSSEUM.jpg",
+            "images/29 CUPIDO.jpg",
+            "images/30 KISS - KLIMT.jpg",
+            "images/31 MARILYN MONROE.jpg",
+            "images/32 HAMLET.jpg",
+            "images/33 SAMSON AND DALILAH.jpg",
+            "images/34 ROSETTA STONE.jpg",
+            "images/35 SWAN LAKE.jpg",
+            "images/36 TERRACOTTA ARMY.jpg",
+            "images/37 ADAM AND EVE IN PARADISE.jpg",
+            "images/38 GIZA PYRAMID.jpg",
+            "images/39 ULYSSES.jpg",
+            "images/40 TOGA.jpg",
+            "images/41 PROMETHEUS.jpg",
+            "images/42 SAGRADA FAMILIA.jpg",
+            "images/43 TRAGEDY.jpg",
+            "images/44 VENUS.Jpg",
+            "images/45 CARMEN.jpg",
+            "images/46 EIFFEL.jpg",
+            "images/47 KONRAD MÄGI.jpg",
+            "images/48 ICAROS.jpg",
+            "images/49 MEMENTO MORI.jpg",
+            "images/50 THE TROJAN HORSE - Tiepolo.jpg"
+        ];
+        
+        let currentIndex = 0;
+        let timer;
+
+        function loadQuestion() {
+            if (currentIndex >= images.length) {
+                document.getElementById("quiz-container").innerHTML = "<h2>Quiz Complete!</h2>";
+                return;
+            }
+            
+            document.getElementById("quiz-image").src = images[currentIndex];
+            document.getElementById("answer").value = "";
+            document.getElementById("result").textContent = "";
+            startTimer();
+        }
+
+        function startTimer() {
+            let timeLeft = 10;
+            document.getElementById("timer").textContent = `Time left: ${timeLeft} sec`;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").textContent = `Time left: ${timeLeft} sec`;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    currentIndex++;
+                    loadQuestion();
+                }
+            }, 1000);
+        }
+        
+        function submitAnswer() {
+            clearInterval(timer);
+            currentIndex++;
+            setTimeout(loadQuestion, 2000);
+        }
+        
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
